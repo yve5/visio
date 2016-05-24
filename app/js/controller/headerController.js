@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helloApp').controller('headerController', ['$scope', '$location', 'authService',
+angular.module('visioApp').controller('headerController', ['$scope', '$location', 'authService',
   function ($scope, $location, authService) {
     $scope.logout = function () {
       authService.setAuth(0);

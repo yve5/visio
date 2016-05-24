@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helloApp').directive('footer', [
+angular.module('visioApp').directive('footer', [
   function () {
     return {
       templateUrl: 'views/footer.html',

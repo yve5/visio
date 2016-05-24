@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('helloApp', [
+  .module('visioApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -14,14 +14,9 @@ angular
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/login.html',
-        controller: 'loginController',
-        controllerAs: 'login'
-      })
-      .when('/profil', {
-        templateUrl: 'views/profil.html',
-        controller: 'profilController',
-        controllerAs: 'profil'
+        templateUrl: 'views/form.html',
+        controller: 'formController',
+        controllerAs: 'form'
       })
       .otherwise({
         redirectTo: '/'

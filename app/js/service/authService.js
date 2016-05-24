@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helloApp').service('authService', [
+angular.module('visioApp').service('authService', [
   function () {
     var isAuthenticated = 0;
 
