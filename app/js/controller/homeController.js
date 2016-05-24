@@ -1,36 +1,36 @@
 'use strict';
 
-angular.module('visioApp').controller('homeController', ['$scope',
-  function ($scope) {
+angular.module('visioApp').controller('homeController', ['$scope', '$http',
+  function ($scope, $http) {
     $scope.data = {};
-    $scope.master = {};
-
-    // Initialisation
-    var currentdDate = new Date();
-
-    $scope.data.dateReunion = {
-      'day': currentdDate.getDay(),
-      'month': currentdDate.getMonth(),
-      'year': currentdDate.getFullYear()
-    };
-
-
-
-    
+    $scope.data.date = moment().format();
     $scope.formIsValid = false;
+    $scope.errorsDetected = false;
+
     $scope.submitForm = function () {
-      $scope.formIsValid = false;
+      console.log('submitForm', $scope.bookingForm.$valid);
 
       if ($scope.bookingForm.$valid) {
         $scope.formIsValid = true;
+        $scope.errorsDetected = false;
+        
+        $http.post('/request.php', $scope.data);
+      } else {
+        $scope.formIsValid = false;
+        $scope.errorsDetected = true;
       }
     };
 
     $scope.resetForm = function () {
-      if (form) {
-        form.$setPristine();
-        form.$setUntouched();
-      }
-      $scope.data = {};
+      $scope.formIsValid = false;
+      $scope.errorsDetected = false;
+
+      console.log('resetForm');
+
+//      if (form) {
+//        form.$setPristine();
+//        form.$setUntouched();
+//      }
+//      $scope.data = {};
     };
   }]);
