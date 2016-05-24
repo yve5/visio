@@ -1,42 +1,285 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h1 class="buffer-top">Authentication</h1>
+    <div class="col-md-8 col-md-offset-2">
 
-      <form ng-submit="submit()">
-        <div class="form-group">
-          <label for="MyLogin">Username</label>
-          <input type="text" class="form-control" ng-model="loginValue" placeholder="Username" autofocus="">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Service Client Arkadin</h3>
         </div>
-        <div class="form-group">
-          <label for="MyPassword">Password</label>
-          <input type="password" class="form-control" ng-model="passwordValue" placeholder="Password">
+        <div class="panel-body">
+          Assistance ou urgence
+          <br />
+          Du lundi au vendredi, de 8h30 à 18h30 (CET)
+          <br />
+          +33 (0)1 70 72 15 49
         </div>
-        <button type="submit" class="btn btn-primary">Log in</button>
+      </div>
+
+      <form name="myForm" class="form-horizontal" novalidate>
+
+        <h1>Réservation de visioconférence</h1>
+        <!--<div class="alert alert-success" role="alert">Le courriel a été envoyé avec succès !</div>-->
+
+        <h2>Informations de réservation</h2>
+
+        <div class="form-group">
+          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
+          <div class="col-md-2">
+            <input class="form-control" name="date-reunion" id="form-date-reunion" type="number" ng-model="data.dateReunion.day" />
+          </div>
+          <div class="col-md-2">
+            <input class="form-control" name="date-reunion" type="number" ng-model="data.dateReunion.month" />
+          </div>
+          <div class="col-md-2">
+            <input class="form-control" name="date-reunion" type="number" ng-model="data.dateReunion.year" />
+          </div>
+        </div>
+        <!--<div class="alert alert-danger" role="alert">La date est incorrect !</div>-->
+
+        <div class="form-group">
+          <label for="form-theme" class="col-md-3 control-label">Thème de la réunion</label>
+          <div class="col-md-9">
+            <input class="form-control" name="formTheme" type="text" placeholder="Thème de la réunion" ng-model="data.theme" required="" />
+          </div>
+        </div>
+        <div ng-show="myForm.$submitted || myForm.formTheme.$touched">
+          <div ng-show="myForm.$error.required" class="alert alert-danger" role="alert">Le thème doit être renseigné !</div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-heure-debut" class="col-md-3 control-label">Heure de début</label>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input class="form-control" name="form-heure-debut-heure" id="form-heure-debut" type="text" value="10" placeholder="HH" />
+              <span class="input-group-addon">h</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input class="form-control" name="form-heure-debut-minute" type="text" value="00" placeholder="MM" />
+              <span class="input-group-addon">min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input class="form-control" name="form-heure-fin-heure" id="form-heure-fin" type="text" value="11" placeholder="HH" />
+              <span class="input-group-addon">h</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <input class="form-control" name="form-heure-fin-minute" type="text" value="00" placeholder="MM" />
+              <span class="input-group-addon">min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-courriel-demandeur" class="col-md-3 control-label">Courriel</label>
+          <div class="col-md-9">
+            <input class="form-control" name="form-courriel-demandeur" id="form-courriel-demandeur" type="text" placeholder="Courriel du demandeur" ng-model="data.email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-telephone-demandeur" class="col-md-3 control-label">Téléphone</label>
+          <div class="col-md-9">
+            <input class="form-control" name="form-telephone-demandeur" id="form-telephone-demandeur" type="text" placeholder="Téléphone du demandeur" ng-model="data.phone" />
+          </div>
+        </div>
+
+
+        <h2>Site Hachette Livre</h2>
+
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Vanves</h3>
+              </div>
+              <div class="panel-body">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-1" ng-model="data.salle1">
+                    FR · Vanves · A. Dumas1
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-2" ng-model="data.salle2">
+                    FR · Vanves · A. Joanne
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-3" ng-model="data.salle3">
+                    FR · Vanves · Bredif
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-4" ng-model="data.salle4">
+                    FR · Vanves · C. de Segur
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-5" ng-model="data.salle5">
+                    FR · Vanves · E. Reclus
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-6" ng-model="data.salle6">
+                    FR · Vanves · J.L. Lagardère
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-7" ng-model="data.salle7">
+                    FR · Vanves · J. Michelet
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-8" ng-model="data.salle8">
+                    FR · Vanves · J. Verne
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-9" ng-model="data.salle9">
+                    FR · Vanves · V. Hugo
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Vélizy</h3>
+              </div>
+              <div class="panel-body">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-10" ng-model="data.salle10">
+                    FR · Vélizy · A. Turing
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Malakoff</h3>
+              </div>
+              <div class="panel-body">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-11" ng-model="data.salle11">
+                    FR · Malakoff · Avenir
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Maurepas</h3>
+              </div>
+              <div class="panel-body">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-salle-12" ng-model="data.salle12">
+                    FR · Maurepas · B. Pascal
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Options</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-assistance" ng-model="data.assistance">
+                    Service d'assistance
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="form-audio" ng-model="data.audio">
+                    Accès audio
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <h2>Autre site de visioconférence</h2>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nom du site / salle / pays</th>
+                <th>Num. ISDN / débit  ou adr. IP</th>
+                <th>Contact technique et numéro de téléphone pour les tests</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
+                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
+                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-click="submitForm()">
+          <span class="glyphicon glyphicon-send"></span> 
+          Soumettre
+        </button>
+        <button type="submit" class="btn btn-primary" ng-click="resetForm()">
+          <span class="glyphicon glyphicon-repeat"></span> 
+          Réiniatiliser
+        </button>
+
       </form>
 
-      <br>
-      <div class="alert alert-danger" ng-show="showError">Wrong credentials. Try again !</div>
+      <br />
+      
+      <pre>data = {{data| json}}</pre>
+      <pre>master = {{master| json}}</pre>
 
-      <h2>Example</h2 >
-      <table class="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>login</td>
-            <td>aze</td>
-          </tr>
-          <tr>
-            <td>password</td>
-            <td>qsd</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

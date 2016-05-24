@@ -14,9 +14,9 @@ angular
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/form.html',
-        controller: 'formController',
-        controllerAs: 'form'
+        templateUrl: 'views/home.html',
+        controller: 'homeController',
+        controllerAs: 'home'
       })
       .otherwise({
         redirectTo: '/'

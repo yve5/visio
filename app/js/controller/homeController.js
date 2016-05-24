@@ -1,20 +1,30 @@
 'use strict';
 
-angular.module('helloApp').controller('homeController', ['$scope', '$location', 'authService',
-  function ($scope, $location, authService) {
-    $scope.loginValue = '';
-    $scope.passwordValue = '';
-    $scope.showError = 0;
+angular.module('visioApp').controller('homeController', ['$scope',
+  function ($scope) {
+    $scope.data = {};
+    $scope.master = {};
 
-    $scope.submit = function () {
-      if ($scope.loginValue === 'aze' && $scope.passwordValue === 'qsd') {
-        authService.setAuth(1);
-      }
+    // Initialisation
+    var currentdDate = new Date();
 
-      if (authService.isAuth()) {
-        $location.path('/profil');
-      } else {
-        $scope.showError = 1;
+    $scope.data.dateReunion = {
+      'day': currentdDate.getDay(),
+      'month': currentdDate.getMonth(),
+      'year': currentdDate.getFullYear()
+    };
+
+
+
+    $scope.submitForm = function () {
+      console.log('Hello', 'World');
+    };
+
+    $scope.resetForm = function () {
+      if (form) {
+        form.$setPristine();
+        form.$setUntouched();
       }
+      $scope.data = {};
     };
   }]);
