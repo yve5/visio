@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('visioApp').controller('footerController', ['$scope', 'authService',
+angular.module('visioApp').controller('footerController', ['$scope',
   function ($scope, authService) {
     var myDate = new Date();
     var currentYear = myDate.getFullYear();

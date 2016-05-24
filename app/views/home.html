@@ -2,25 +2,52 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title">Service Client Arkadin</h3>
+      <!--      <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Service Client Arkadin</h3>
+              </div>
+              <div class="panel-body">
+                Assistance ou urgence
+                <br />
+                Du lundi au vendredi, de 8h30 à 18h30 (CET)
+                <br />
+                +33 (0)1 70 72 15 49
+              </div>
+            </div>-->
+
+      <h1>Réservation de visioconférence</h1>
+
+      <form name="bookingForm" class="form-horizontal" ng-submit="submitForm()" novalidate>
+        <div class="alert alert-success" role="alert" ng-show="{{ formIsValid}}">
+          Votre demande a été envoyé avec succès !
         </div>
-        <div class="panel-body">
-          Assistance ou urgence
-          <br />
-          Du lundi au vendredi, de 8h30 à 18h30 (CET)
-          <br />
-          +33 (0)1 70 72 15 49
+
+        <h2>Informations</h2>
+
+        <div class="form-group">
+          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
+          <div class="col-md-9">
+
+
+            <div class='input-group date' id='datetimepicker1'>
+              <input type='text' class="form-control" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+
+          </div>
         </div>
-      </div>
 
-      <form name="myForm" class="form-horizontal" novalidate>
 
-        <h1>Réservation de visioconférence</h1>
-        <!--<div class="alert alert-success" role="alert">Le courriel a été envoyé avec succès !</div>-->
+        <script type="text/javascript">
+            $(function () {
+              $('#datetimepicker1').datetimepicker();
+            });
+        </script>
 
-        <h2>Informations de réservation</h2>
+
+
 
         <div class="form-group">
           <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
@@ -34,16 +61,30 @@
             <input class="form-control" name="date-reunion" type="number" ng-model="data.dateReunion.year" />
           </div>
         </div>
-        <!--<div class="alert alert-danger" role="alert">La date est incorrect !</div>-->
 
-        <div class="form-group">
-          <label for="form-theme" class="col-md-3 control-label">Thème de la réunion</label>
+        <!--        <div class="form-group" ng-class="{ 'has-error' : bookingForm.name.$invalid && !bookingForm.name.$pristine }">
+                  <label>Name</label>
+                  <input type="text" name="name" class="form-control" ng-model="data.name" required>
+                  <p ng-show="bookingForm.name.$invalid && !bookingForm.name.$pristine" class="help-block">You name is required.</p>
+                </div>-->
+
+
+        <!--        <div class="form-group" ng-class="{ 'has-error' : bookingForm.username.$invalid && !bookingForm.username.$pristine }">
+                  <label>Username</label>
+                  <input type="text" name="username" class="form-control" ng-model="data.username" ng-minlength="3" ng-maxlength="8">
+                  <p ng-show="bookingForm.username.$error.minlength" class="help-block">Username is too short.</p>
+                  <p ng-show="bookingForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+                </div>-->
+
+
+        <div class="form-group" ng-class="{ 'has-error' : bookingForm.theme.$invalid && !bookingForm.theme.$pristine }">
+          <label for="theme" class="col-md-3 control-label">Thème de la réunion</label>
           <div class="col-md-9">
-            <input class="form-control" name="formTheme" type="text" placeholder="Thème de la réunion" ng-model="data.theme" required="" />
+            <input class="form-control" name="theme" id="theme" type="text" placeholder="Thème de la réunion" ng-model="data.theme" required="" />
+            <p ng-show="bookingForm.theme.$invalid && !bookingForm.theme.$pristine" class="help-block">
+              Le thème doit être renseigné !
+            </p>
           </div>
-        </div>
-        <div ng-show="myForm.$submitted || myForm.formTheme.$touched">
-          <div ng-show="myForm.$error.required" class="alert alert-danger" role="alert">Le thème doit être renseigné !</div>
         </div>
 
         <div class="form-group">
@@ -78,10 +119,11 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="form-courriel-demandeur" class="col-md-3 control-label">Courriel</label>
+        <div class="form-group" ng-class="{ 'has-error' : bookingForm.email.$invalid && !bookingForm.email.$pristine }">
+          <label for="email" class="col-md-3 control-label">Courriel</label>
           <div class="col-md-9">
-            <input class="form-control" name="form-courriel-demandeur" id="form-courriel-demandeur" type="text" placeholder="Courriel du demandeur" ng-model="data.email" />
+            <input class="form-control" name="email" id="email" type="email" placeholder="Courriel du demandeur" ng-model="data.email" />
+            <p ng-show="bookingForm.email.$invalid && !bookingForm.email.$pristine" class="help-block">Le courriel est incorrect !</p>
           </div>
         </div>
 
@@ -260,11 +302,26 @@
                 <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
                 <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
               </tr>
+              <tr>
+                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
+                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
+                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
+              </tr>
+              <tr>
+                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
+                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
+                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
+              </tr>
+              <tr>
+                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
+                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
+                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <button type="submit" class="btn btn-primary" ng-click="submitForm()">
+        <button type="submit" class="btn btn-primary">
           <span class="glyphicon glyphicon-send"></span> 
           Soumettre
         </button>
@@ -275,10 +332,9 @@
 
       </form>
 
-      <br />
-      
-      <pre>data = {{data| json}}</pre>
-      <pre>master = {{master| json}}</pre>
+      <!--      <br />
+            <pre>data = {{data| json}}</pre>
+            <pre>master = {{master| json}}</pre>-->
 
     </div>
   </div>

@@ -7,9 +7,14 @@
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    
+
     <!-- build:css(.) css/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+
     <!-- endbuild -->
     <!-- build:css css/main.css -->
     <link rel="stylesheet" href="css/sass.css">
@@ -28,7 +33,7 @@
     <noscript>Please active JavaScript in your webbrowser !</noscript>
 
     <!-- build:js(.) js/vendor.js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
@@ -39,8 +44,10 @@
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- endbuild -->
-    
+
     <!-- build:js js/scripts.js -->
     <script src="js/main.js"></script>
     <script src="js/controller/homeController.js"></script>
@@ -48,7 +55,6 @@
     <script src="js/controller/headerController.js"></script>
     <script src="js/directive/footerDirective.js"></script>
     <script src="js/directive/headerDirective.js"></script>
-    <script src="js/service/authService.js"></script>
     <!-- endbuild -->
   </body>
 </html>

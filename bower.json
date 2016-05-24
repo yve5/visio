@@ -23,5 +23,8 @@
         "dist/js/bootstrap.js"
       ]
     }
+  },
+  "devDependencies": {
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   }
 }

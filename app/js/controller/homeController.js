@@ -16,8 +16,14 @@ angular.module('visioApp').controller('homeController', ['$scope',
 
 
 
+    
+    $scope.formIsValid = false;
     $scope.submitForm = function () {
-      console.log('Hello', 'World');
+      $scope.formIsValid = false;
+
+      if ($scope.bookingForm.$valid) {
+        $scope.formIsValid = true;
+      }
     };
 
     $scope.resetForm = function () {
