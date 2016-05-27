@@ -1,10 +1,14 @@
 'use strict';
 
-angular.module('visioApp')
+angular.module('app')
         .controller('homeController', ['$scope', '$http',
           function ($scope, $http) {
             $scope.data = {};
             $scope.data.date = moment().format();
+            
+            $scope.data.starttime = moment().hours('10').minutes('00');
+            $scope.data.endtime = moment().hours('11').minutes('00');
+            
             $scope.formIsValid = false;
             $scope.errorsDetected = false;
 
@@ -15,7 +19,7 @@ angular.module('visioApp')
                 $scope.formIsValid = true;
                 $scope.errorsDetected = false;
 
-                console.log('Success', $scope.data);
+                console.log('success', $scope.data);
                 // $http.post('/request.php', $scope.data);
                 
               } else {

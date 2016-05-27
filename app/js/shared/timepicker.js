@@ -1,21 +1,30 @@
 'use strict';
 
-angular.module('visioApp')
+angular.module('app')
         .directive('timepicker', [
           function () {
             return {
               restrict: 'ACE',
               templateUrl: 'views/timepicker.html',
-              link: function (scope, element, attrs) {
+              scope: {
+                time: '=time'
+              },
+              link: function ($scope, element, attrs) {
+                var defaultDate = 'moment';
+                
+                if (typeof $scope.time !== 'undefined') {
+                  defaultDate = $scope.time;
+                }
+                
                 element.datetimepicker({
-                  defaultDate: attrs.time,
+                  defaultDate: defaultDate,
                   format: 'LT',
                   locale: 'fr'
                 });
 
                 element.on('dp.change', function (event) {
-                  scope.data.date = event.date;
-                  scope.$apply();
+                  $scope.time = event.date;
+                  $scope.$apply();
                 });
               }
             };

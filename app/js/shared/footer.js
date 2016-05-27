@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('visioApp')
+angular.module('app')
         .controller('footerController', ['$scope',
           function ($scope) {
             $scope.now = moment().format('Y');

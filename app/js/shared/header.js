@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('visioApp')
+angular.module('app')
         .directive('header', [
           function () {
             return {
@@ -10,4 +10,4 @@ angular.module('visioApp')
             };
           }]);
 
-//angular.module('visioApp').controller('headerController', [function () {}]);
+//angular.module('app').controller('headerController', [function () {}]);

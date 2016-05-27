@@ -1,41 +1,34 @@
 'use strict';
 
-angular.module('visioApp')
-        .controller('datepickerController', ['$scope',
-          function ($scope) {
-//            $scope.vm = {
-//              message: "Bootstrap Datepicker Directive",
-//              dateTime: {}
-//            };
-//
-//            $scope.$watch('change', function () {
-//              console.log('Hello', 'World');
-//            });
-          }])
+angular.module('app')
         .directive('datepicker', [
           function () {
             return {
               restrict: 'ACE',
               templateUrl: 'views/datepicker.html',
-              controller: 'datepickerController',
-              link: function (scope, element, attrs) {
+              scope: {
+                date: '=date'
+              },
+              link: function ($scope, element, attrs) {
+                var defaultDate = 'moment';
+                
+                if (typeof $scope.date !== 'undefined') {
+                  defaultDate = $scope.date;
+                }
+                
                 element.datetimepicker({
-//                  defaultDate: 'moment',
-                  defaultDate: scope.data.date,
-                          format: 'L',
+                  defaultDate: defaultDate,
+                  format: 'L',
                   locale: 'fr'
                 });
 
                 element.on('dp.change', function (event) {
-                  scope.data.date = event.date;
-                  scope.$apply();
+                  $scope.date = event.date;
+                  $scope.$apply();
                 });
               }
             };
           }]);
-
-
-
 
 
 

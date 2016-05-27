@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-      <div class="panel panel-danger">
+<!--      <div class="panel panel-danger">
         <div class="panel-heading">
           <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
         </div>
@@ -11,7 +11,9 @@
           <br />
           <span class="red-text">+33 (0)1 70 72 15 49</span>
         </div>
-      </div>
+      </div>-->
+      
+      <pre>data = {{data| json}}</pre>
 
       <h1>Réservation de visioconférence</h1>
 
@@ -21,7 +23,7 @@
         <div class="form-group">
           <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
           <div class="col-md-9">
-            <datepicker class="input-group date" ng-model="data.date" default-date="{{data.date}}" />
+            <datepicker class="input-group date" date="data.date" />
           </div>
         </div>
 
@@ -54,17 +56,7 @@
         <div class="form-group">
           <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
           <div class="col-md-9">
-
-            <timepicker ng-model="data.start" time="11:00" />
-
-
-
-            <div class='input-group date' id='datetimepicker3'>
-              <input type='text' class="form-control" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-time"></span>
-              </span>
-            </div>
+            <timepicker class="input-group date" time="data.starttime" />
           </div>
         </div>
 
@@ -72,46 +64,9 @@
         <div class="form-group">
           <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
           <div class="col-md-9">
-
-            <div class='input-group date' id='datetimepicker4'>
-              <input type='text' class="form-control" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-time"></span>
-              </span>
-            </div>
-
+            <timepicker class="input-group date" time="data.endtime" />
           </div>
         </div>
-
-        <script type="text/javascript">
-              $(function () {
-                var start = moment();
-                start.hours(10).minutes(00);
-
-                var end =  moment();
-                end.hours(11).minutes(00);
-
-                $('#datetimepicker3').datetimepicker({
-                  defaultDate: start,
-                  format: 'LT',
-                  locale: 'fr'
-                });
-
-                $('#datetimepicker4').datetimepicker({
-                  defaultDate: end,
-                  format: 'LT',
-                  locale: 'fr'
-                });
-
-                $("#datetimepicker3").on("dp.change", function (e) {
-                  $('#datetimepicker4').data("DateTimePicker").minDate(e.date);
-                });
-
-                $("#datetimepicker4").on("dp.change", function (e) {
-                  $('#datetimepicker3').data("DateTimePicker").maxDate(e.date);
-                });
-              });
-        </script>
 
         <div class="form-group" ng-class="{ 'has-error' : bookingForm.email.$invalid && !bookingForm.email.$pristine }">
           <label for="email" class="col-md-3 control-label">Courriel</label>
@@ -333,12 +288,12 @@
       <div class="alert alert-success" role="alert" ng-show="formIsValid">
         Votre demande a été envoyé avec succès !
       </div>
-      
+
       <div class="alert alert-danger" role="alert" ng-show="errorsDetected">
         Des erreurs ont été détectées.
       </div>
 
-      <!--<pre>data = {{data| json}}</pre>-->
+      <pre>data = {{data | json}}</pre>
 
     </div>
   </div>

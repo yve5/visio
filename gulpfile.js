@@ -1,14 +1,14 @@
 'use strict';
 
 // Require
-var gulp    = require('gulp');
-var $       = require('gulp-load-plugins')();
-var runs    = require('run-sequence');
-var bsync   = require('browser-sync');
-var reload  = bsync.reload;
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
+var runs = require('run-sequence');
+var bsync = require('browser-sync');
+var reload = bsync.reload;
 var stylish = require('jshint-stylish');
-var path    = require('path');
-var Karma   = require('karma').Server;
+var path = require('path');
+var Karma = require('karma').Server;
 
 
 // Configurable paths
@@ -105,7 +105,7 @@ gulp.task('fonts', function () {
   // Bootstrap Fonts
   var bootstrap = gulp.src(appConfig.bower + '/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}')
           .pipe(gulp.dest(appConfig.dist + '/fonts'));
-  
+
   // Output
   return project && bootstrap;
 });
