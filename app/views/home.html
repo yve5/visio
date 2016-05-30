@@ -2,17 +2,17 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-<!--      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
-        </div>
-        <div class="panel-body">
-          Du lundi au vendredi, de 8h30 à 18h30 (CET)
-          <br />
-          <span class="red-text">+33 (0)1 70 72 15 49</span>
-        </div>
-      </div>-->
-      
+      <!--      <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
+              </div>
+              <div class="panel-body">
+                Du lundi au vendredi, de 8h30 à 18h30 (CET)
+                <br />
+                <span class="red-text">+33 (0)1 70 72 15 49</span>
+              </div>
+            </div>-->
+
       <pre>data = {{data| json}}</pre>
 
       <h1>Réservation de visioconférence</h1>
@@ -27,29 +27,22 @@
           </div>
         </div>
 
-
-        <!--        <div class="form-group" ng-class="{ 'has-error' : bookingForm.name.$invalid && !bookingForm.name.$pristine }">
-                  <label>Name</label>
-                  <input type="text" name="name" class="form-control" ng-model="data.name" required>
-                  <p ng-show="bookingForm.name.$invalid && !bookingForm.name.$pristine" class="help-block">You name is required.</p>
-                </div>-->
+        
+        <!--<input type="text" ng-model="data.date" />-->
 
 
-        <!--        <div class="form-group" ng-class="{ 'has-error' : bookingForm.username.$invalid && !bookingForm.username.$pristine }">
-                  <label>Username</label>
-                  <input type="text" name="username" class="form-control" ng-model="data.username" ng-minlength="3" ng-maxlength="8">
-                  <p ng-show="bookingForm.username.$error.minlength" class="help-block">Username is too short.</p>
-                  <p ng-show="bookingForm.username.$error.maxlength" class="help-block">Username is too long.</p>
-                </div>-->
-
+        <div>
+          Size (integer 0 - 10):
+          <input type="number" ng-model="size" name="size" min="0" max="10" integer />{{size}}<br />
+          <span ng-show="bookingForm.size.$error.integer">The value is not a valid integer!</span>
+          <span ng-show="bookingForm.size.$error.min || bookingForm.size.$error.max">The value must be in range 0 to 10!</span>
+        </div>
 
         <div class="form-group" ng-class="{ 'has-error' : bookingForm.theme.$invalid && !bookingForm.theme.$pristine }">
           <label for="theme" class="col-md-3 control-label">Thème de la réunion</label>
           <div class="col-md-9">
             <input class="form-control" name="theme" id="theme" type="text" placeholder="Thème de la réunion" ng-model="data.theme" required="" />
-            <p ng-show="bookingForm.theme.$invalid && !bookingForm.theme.$pristine" class="help-block">
-              Le thème doit être renseigné !
-            </p>
+            <p ng-show="bookingForm.theme.$invalid && !bookingForm.theme.$pristine" class="help-block">Le thème doit être renseigné !</p>
           </div>
         </div>
 
@@ -59,7 +52,6 @@
             <timepicker class="input-group date" time="data.starttime" />
           </div>
         </div>
-
 
         <div class="form-group">
           <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
@@ -72,7 +64,8 @@
           <label for="email" class="col-md-3 control-label">Courriel</label>
           <div class="col-md-9">
             <input class="form-control" name="email" id="email" type="email" placeholder="Courriel du demandeur" ng-model="data.email" />
-            <p ng-show="bookingForm.email.$invalid && !bookingForm.email.$pristine" class="help-block">Le courriel est incorrect !</p>
+            <p ng-show="bookingForm.email.$invalid" class="help-block">Le courriel est incorrect !</p>
+            <!--<p ng-show="bookingForm.email.$invalid && !bookingForm.email.$pristine" class="help-block">Le courriel est incorrect !</p>-->
           </div>
         </div>
 
@@ -248,28 +241,21 @@
             </thead>
             <tbody>
               <tr>
-                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
-                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
-                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
-              </tr>
-              <tr>
-                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
-                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
-                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
-              </tr>
-              <tr>
-                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
-                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
-                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
-              </tr>
-              <tr>
-                <td><input class="form-control" name="form-site[1][nom]" type="text" placeholder="Nom" /></td>
-                <td><input class="form-control" name="form-site[1][numero]" type="text" placeholder="Numéro" /></td>
-                <td><input class="form-control" name="form-site[1][contact]" type="text" placeholder="Contact" /></td>
+                <td><input class="form-control" name="form-site[][nom]" type="text" placeholder="Nom" /></td>
+                <td><input class="form-control" name="form-site[][numero]" type="text" placeholder="Numéro" /></td>
+                <td><input class="form-control" name="form-site[][contact]" type="text" placeholder="Contact" /></td>
               </tr>
             </tbody>
           </table>
         </div>
+        
+        <button type="submit" class="btn btn-default">
+          <span class="glyphicon glyphicon-plus"></span> 
+          Ajouter une salle
+        </button>
+        
+        <br />
+        <br />
 
         <button type="submit" class="btn btn-primary">
           <span class="glyphicon glyphicon-send"></span> 
@@ -293,7 +279,7 @@
         Des erreurs ont été détectées.
       </div>
 
-      <pre>data = {{data | json}}</pre>
+      <pre>data = {{data| json}}</pre>
 
     </div>
   </div>

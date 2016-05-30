@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', [
+var app = angular.module('app', [
   'ngAnimate',
   'ngAria',
   'ngCookies',
@@ -9,7 +9,9 @@ angular.module('app', [
   'ngRoute',
   'ngSanitize',
   'ngTouch'
-]).config(['$routeProvider',
+]);
+
+app.config(['$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/', {
       templateUrl: 'views/home.html',

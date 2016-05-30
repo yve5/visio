@@ -1,34 +1,36 @@
 'use strict';
 
-angular.module('app')
-        .directive('datepicker', [
-          function () {
-            return {
-              restrict: 'ACE',
-              templateUrl: 'views/datepicker.html',
-              scope: {
-                date: '=date'
-              },
-              link: function ($scope, element, attrs) {
-                var defaultDate = 'moment';
-                
-                if (typeof $scope.date !== 'undefined') {
-                  defaultDate = $scope.date;
-                }
-                
-                element.datetimepicker({
-                  defaultDate: defaultDate,
-                  format: 'L',
-                  locale: 'fr'
-                });
+var app = angular.module('app');
 
-                element.on('dp.change', function (event) {
-                  $scope.date = event.date;
-                  $scope.$apply();
-                });
-              }
-            };
-          }]);
+app.directive('datepicker', [
+  function () {
+    return {
+      restrict: 'ACE',
+      templateUrl: 'views/datepicker.html',
+      scope: {
+        date: '=date'
+      },
+      link: function ($scope, element, attrs) {
+        var defaultDate = 'moment';
+
+        if (typeof $scope.date !== 'undefined') {
+          defaultDate = $scope.date;
+        }
+
+        element.datetimepicker({
+          defaultDate: defaultDate,
+          minDate: defaultDate,
+          format: 'L',
+          locale: 'fr'
+        });
+
+        element.on('dp.change', function (event) {
+          $scope.date = event.date;
+          $scope.$apply();
+        });
+      }
+    };
+  }]);
 
 
 

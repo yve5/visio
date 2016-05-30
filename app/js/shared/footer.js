@@ -1,15 +1,17 @@
 'use strict';
 
-angular.module('app')
-        .controller('footerController', ['$scope',
-          function ($scope) {
-            $scope.now = moment().format('Y');
-          }])
-        .directive('footer', [
-          function () {
-            return {
-              templateUrl: 'views/footer.html',
-              controller: 'footerController',
-              restrict: 'ACE'
-            };
-          }]);
+var app = angular.module('app');
+
+app.controller('footerController', ['$scope',
+  function ($scope) {
+    $scope.now = moment().format('Y');
+  }]);
+
+app.directive('footer', [
+  function () {
+    return {
+      templateUrl: 'views/footer.html',
+      controller: 'footerController',
+      restrict: 'ACE'
+    };
+  }]);
