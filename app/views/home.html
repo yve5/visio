@@ -2,78 +2,75 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-      <!--      <div class="panel panel-danger">
-              <div class="panel-heading">
-                <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
-              </div>
-              <div class="panel-body">
-                Du lundi au vendredi, de 8h30 à 18h30 (CET)
-                <br />
-                <span class="red-text">+33 (0)1 70 72 15 49</span>
-              </div>
-            </div>-->
-
-      <pre>data = {{data| json}}</pre>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
+        </div>
+        <div class="panel-body">
+          Du lundi au vendredi, de 8h30 à 18h30 (CET)
+          <br />
+          <span class="red-text">+33 (0)1 70 72 15 49</span>
+        </div>
+      </div>
 
       <h1>Réservation de visioconférence</h1>
 
-      <form name="bookingForm" class="form-horizontal" ng-submit="submitForm()" novalidate>
+      <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
+        <span class="glyphicon glyphicon-alert"></span>
+        Veuillez remplir le formulaire et suivre les indications le cas échéant.
+      </div>
+
+      <form name="form" class="form-horizontal" novalidate>
         <h2>Informations</h2>
 
+<!--        <div class="form-group">
+          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
+          <div class="col-md-9">
+            <datepicker class="input-group date" date="form.date" />
+          </div>
+        </div>-->
+        
         <div class="form-group">
           <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
           <div class="col-md-9">
-            <datepicker class="input-group date" date="data.date" />
+            <aze class="input-group date" ng-model="booking.hello" />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" ng-model="booking.hello" />
           </div>
         </div>
 
-        
-        <!--<input type="text" ng-model="data.date" />-->
-
-
-        <div>
-          Size (integer 0 - 10):
-          <input type="number" ng-model="size" name="size" min="0" max="10" integer />{{size}}<br />
-          <span ng-show="bookingForm.size.$error.integer">The value is not a valid integer!</span>
-          <span ng-show="bookingForm.size.$error.min || bookingForm.size.$error.max">The value must be in range 0 to 10!</span>
-        </div>
-
-        <div class="form-group" ng-class="{ 'has-error' : bookingForm.theme.$invalid && !bookingForm.theme.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error' : (form.theme.$invalid && !form.theme.$pristine) || (form.theme.$invalid && form.$submitted) }">
           <label for="theme" class="col-md-3 control-label">Thème de la réunion</label>
           <div class="col-md-9">
-            <input class="form-control" name="theme" id="theme" type="text" placeholder="Thème de la réunion" ng-model="data.theme" required="" />
-            <p ng-show="bookingForm.theme.$invalid && !bookingForm.theme.$pristine" class="help-block">Le thème doit être renseigné !</p>
+            <input class="form-control" name="theme" id="theme" type="text" placeholder="Thème de la réunion" ng-model="booking.theme" required="" />
+            <p ng-show="(form.theme.$invalid && !form.theme.$pristine) || (form.theme.$invalid && form.$submitted)" class="help-block">
+              Le thème doit être renseigné !
+            </p>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
-          <div class="col-md-9">
-            <timepicker class="input-group date" time="data.starttime" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
-          <div class="col-md-9">
-            <timepicker class="input-group date" time="data.endtime" />
-          </div>
-        </div>
-
-        <div class="form-group" ng-class="{ 'has-error' : bookingForm.email.$invalid && !bookingForm.email.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error' : (form.email.$invalid && !form.email.$pristine) || (form.email.$invalid && form.$submitted) }">
           <label for="email" class="col-md-3 control-label">Courriel</label>
           <div class="col-md-9">
-            <input class="form-control" name="email" id="email" type="email" placeholder="Courriel du demandeur" ng-model="data.email" />
-            <p ng-show="bookingForm.email.$invalid" class="help-block">Le courriel est incorrect !</p>
-            <!--<p ng-show="bookingForm.email.$invalid && !bookingForm.email.$pristine" class="help-block">Le courriel est incorrect !</p>-->
+            <input class="form-control" name="email" id="email" type="email" placeholder="Courriel du demandeur" ng-model="booking.email" required="" />
+            <p ng-show="(form.email.$invalid && !form.email.$pristine) || (form.email.$invalid && form.$submitted)" class="help-block">
+              Le courriel est incorrect !
+            </p>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error' : bookingForm.phone.$invalid && !bookingForm.phone.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error' : (form.phone.$invalid && !form.phone.$pristine) || (form.phone.$invalid && form.$submitted) }">
           <label for="phone" class="col-md-3 control-label">Téléphone</label>
           <div class="col-md-9">
-            <input class="form-control" name="phone" id="phone" type="text" placeholder="Téléphone du demandeur" ng-model="data.phone" required="" />
-            <p ng-show="bookingForm.phone.$invalid && !bookingForm.phone.$pristine" class="help-block">Le numéro de téléphone est incorrect !</p>
+            <input class="form-control" name="phone" id="phone" type="text" placeholder="Téléphone du demandeur" ng-model="booking.phone" required="" />
+            <p ng-show="(form.phone.$invalid && !form.phone.$pristine) || (form.phone.$invalid && form.$submitted)" class="help-block">
+              Le numéro de téléphone est incorrect !
+            </p>
           </div>
         </div>
 
@@ -90,63 +87,63 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-1" ng-model="data.salle1">
+                    <input type="checkbox" name="form-salle-1" ng-model="booking.salle1">
                     FR · Vanves · A. Dumas1
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-2" ng-model="data.salle2">
+                    <input type="checkbox" name="form-salle-2" ng-model="booking.salle2">
                     FR · Vanves · A. Joanne
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-3" ng-model="data.salle3">
+                    <input type="checkbox" name="form-salle-3" ng-model="booking.salle3">
                     FR · Vanves · Bredif
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-4" ng-model="data.salle4">
+                    <input type="checkbox" name="form-salle-4" ng-model="booking.salle4">
                     FR · Vanves · C. de Segur
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-5" ng-model="data.salle5">
+                    <input type="checkbox" name="form-salle-5" ng-model="booking.salle5">
                     FR · Vanves · E. Reclus
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-6" ng-model="data.salle6">
+                    <input type="checkbox" name="form-salle-6" ng-model="booking.salle6">
                     FR · Vanves · J.L. Lagardère
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-7" ng-model="data.salle7">
+                    <input type="checkbox" name="form-salle-7" ng-model="booking.salle7">
                     FR · Vanves · J. Michelet
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-8" ng-model="data.salle8">
+                    <input type="checkbox" name="form-salle-8" ng-model="booking.salle8">
                     FR · Vanves · J. Verne
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-9" ng-model="data.salle9">
+                    <input type="checkbox" name="form-salle-9" ng-model="booking.salle9">
                     FR · Vanves · V. Hugo
                   </label>
                 </div>
@@ -162,7 +159,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-10" ng-model="data.salle10">
+                    <input type="checkbox" name="form-salle-10" ng-model="booking.salle10">
                     FR · Vélizy · A. Turing
                   </label>
                 </div>
@@ -176,7 +173,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-11" ng-model="data.salle11">
+                    <input type="checkbox" name="form-salle-11" ng-model="booking.salle11">
                     FR · Malakoff · Avenir
                   </label>
                 </div>
@@ -190,7 +187,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-salle-12" ng-model="data.salle12">
+                    <input type="checkbox" name="form-salle-12" ng-model="booking.salle12">
                     FR · Maurepas · B. Pascal
                   </label>
                 </div>
@@ -209,7 +206,7 @@
               <div class="col-md-6">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-assistance" ng-model="data.assistance">
+                    <input type="checkbox" name="form-assistance" ng-model="booking.assistance">
                     Service d'assistance
                   </label>
                 </div>
@@ -218,7 +215,7 @@
               <div class="col-md-6">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="form-audio" ng-model="data.audio">
+                    <input type="checkbox" name="form-audio" ng-model="booking.audio">
                     Accès audio
                   </label>
                 </div>
@@ -227,59 +224,91 @@
           </div>
         </div>
 
-
-        <h2>Autre site de visioconférence</h2>
-
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Nom du site / salle / pays</th>
-                <th>Num. ISDN / débit  ou adr. IP</th>
-                <th>Contact technique et numéro de téléphone pour les tests</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input class="form-control" name="form-site[][nom]" type="text" placeholder="Nom" /></td>
-                <td><input class="form-control" name="form-site[][numero]" type="text" placeholder="Numéro" /></td>
-                <td><input class="form-control" name="form-site[][contact]" type="text" placeholder="Contact" /></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <button type="submit" class="btn btn-default">
-          <span class="glyphicon glyphicon-plus"></span> 
-          Ajouter une salle
-        </button>
-        
-        <br />
-        <br />
-
-        <button type="submit" class="btn btn-primary">
-          <span class="glyphicon glyphicon-send"></span> 
-          Soumettre
-        </button>
-
-        <button class="btn btn-primary" ng-click="resetForm()">
-          <span class="glyphicon glyphicon-repeat"></span> 
-          Réinitialiser
-        </button>
-
+        <p>
+          <button type="button" class="btn btn-primary" ng-click="reset(form)">
+            <span class="glyphicon glyphicon-repeat"></span> 
+            Réinitialiser
+          </button>
+          <button type="submit" class="btn btn-primary" ng-click="update(booking)">
+            <span class="glyphicon glyphicon-send"></span> 
+            Soumettre
+          </button>
+        </p>
       </form>
 
-      <br />
 
-      <div class="alert alert-success" role="alert" ng-show="formIsValid">
-        Votre demande a été envoyé avec succès !
+      <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
+        <span class="glyphicon glyphicon-alert"></span>
+        Veuillez remplir le formulaire et suivre les indications le cas échéant.
       </div>
 
-      <div class="alert alert-danger" role="alert" ng-show="errorsDetected">
-        Des erreurs ont été détectées.
-      </div>
+      <!--      <div class="alert alert-success" ng-show="form.$submitted && form.$valid">
+              <span class="glyphicon glyphicon-alert"></span>
+              Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
+            </div>-->
 
-      <pre>data = {{data| json}}</pre>
+
+      <pre>booking = {{booking| json}}</pre>
+      <pre>master = {{master| json}}</pre>
+
+
+
+
+      <!--      
+                      <input type="text" ng-model="booking.date" />
+              
+              
+                      <div>
+                        Size (integer 0 - 10):
+                        <input type="number" ng-model="size" name="size" min="0" max="10" integer />{{size}}<br />
+                        <span ng-show="bookingForm.size.$error.integer">The value is not a valid integer!</span>
+                        <span ng-show="bookingForm.size.$error.min || bookingForm.size.$error.max">The value must be in range 0 to 10!</span>
+                      </div>
+              
+                      
+                      <div class="form-group">
+                        <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
+                        <div class="col-md-9">
+                          <timepicker class="input-group date" time="data.starttime" />
+                        </div>
+                      </div>
+              
+                      <div class="form-group">
+                        <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
+                        <div class="col-md-9">
+                          <timepicker class="input-group date" time="data.endtime" />
+                        </div>
+                      </div>
+              
+              
+              
+                      <h2>Autre site de visioconférence</h2>
+              
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Nom du site / salle / pays</th>
+                              <th>Num. ISDN / débit  ou adr. IP</th>
+                              <th>Contact technique et numéro de téléphone pour les tests</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input class="form-control" name="form-site[][nom]" type="text" placeholder="Nom" /></td>
+                              <td><input class="form-control" name="form-site[][numero]" type="text" placeholder="Numéro" /></td>
+                              <td><input class="form-control" name="form-site[][contact]" type="text" placeholder="Contact" /></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span> 
+                        Ajouter une salle
+                      </button>
+                      
+      -->                  
 
     </div>
   </div>
