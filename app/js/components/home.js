@@ -7,9 +7,14 @@ app.controller('homeController', ['$scope', '$http',
     $scope.master = {};
 
     $scope.update = function (booking) {
-//      $scope.form.theme.$invalid = true;
+//      console.log('form', $scope.form.theme.$valid);
 
-      $scope.master = angular.copy(booking);
+      $scope.checkRooms();
+
+      if ($scope.form.$valid) {
+        $scope.master = angular.copy(booking);
+        console.log('success', $scope.master);
+      }
     };
 
     $scope.reset = function (form) {
@@ -23,58 +28,93 @@ app.controller('homeController', ['$scope', '$http',
     $scope.reset();
 
 
+    $scope.booking.starttime = moment().hours('10').minutes('00').seconds('00');
+    $scope.booking.endtime = moment().hours('11').minutes('00').seconds('00');
 
 
 
+    // Salles libres de saisie
+    $scope.sample = {name: '', number: '', contact: ''};
+    $scope.booking.freerooms = [];
+    $scope.booking.freerooms.push(angular.copy($scope.sample));
+
+    $scope.addFreeroom = function () {
+      $scope.booking.freerooms.push(angular.copy($scope.sample));
+    }
+
+    // Salles regulieres
+//    $scope.booking.rooms = [
+//      {name:'Hello World', checked: false}
+//    ];
+
+
+    // Controle sur les salles
+    $scope.checkRooms = function () {
+      var result = false;
+
+      // au moins 2 salles regulieres
+      var count = 0;
+
+      if ($scope.booking.room1 === true) {
+        count++;
+      }
+      if ($scope.booking.room2 === true) {
+        count++;
+      }
+      if ($scope.booking.room3 === true) {
+        count++;
+      }
+      if ($scope.booking.room4 === true) {
+        count++;
+      }
+      if ($scope.booking.room5 === true) {
+        count++;
+      }
+      if ($scope.booking.room6 === true) {
+        count++;
+      }
+      if ($scope.booking.room7 === true) {
+        count++;
+      }
+      if ($scope.booking.room8 === true) {
+        count++;
+      }
+      if ($scope.booking.room9 === true) {
+        count++;
+      }
+      if ($scope.booking.room10 === true) {
+        count++;
+      }
+      if ($scope.booking.room11 === true) {
+        count++;
+      }
+      if ($scope.booking.room12 === true) {
+        count++;
+      }
+
+      if (count > 1) {
+        return true;
+      }
+      
+      // une salle reguliere et au moins une salle libre
+      if (count === 1) {
+        console.log('Hello', 'World');
+      }
+      
+      // au moins deux salles libres
+    }
 
 
 
+    // // Si la date de depart change, il faut egalement mettre a jour la date de fin au cas ou.
+    // $scope.$watch('booking.starttime', function (newValue, oldValue) {
 
+    //   console.log('starttime', $scope.booking.starttime.format('LLL'));
 
+    //   var aze = $scope.booking.starttime.hours() + 1;
+    //   $scope.booking.endtime.hours('12');
 
-//    $scope.data = {};
-//    $scope.data.date = moment().format();
-//
-//    $scope.data.starttime = moment().hours('10').minutes('00').seconds('00');
-//    $scope.data.endtime = moment().hours('11').minutes('00').seconds('00');
-//
-//    $scope.formIsValid = false;
-//    $scope.errorsDetected = false;
-//
-//
-//    $scope.$watch('data.starttime', function (newValue, oldValue) {
-//      
-////      console.log('data.starttime', $scope.data.starttime.hours());
-////      console.log('data.starttime', $scope.data.starttime.hours() + 1);
-//      
-//      var aze = $scope.data.starttime.hours() + 1;
-//      $scope.data.endtime.hours(aze);
-//      
-//    });
-//
-//
-//
-//    $scope.submitForm = function () {
-//      console.log('submitForm', $scope.bookingForm.$valid);
-//
-//      if ($scope.bookingForm.$valid) {
-//        $scope.formIsValid = true;
-//        $scope.errorsDetected = false;
-//
-//        console.log('success', $scope.data);
-//        // $http.post('/request.php', $scope.data);
-//
-//      } else {
-//        $scope.formIsValid = false;
-//        $scope.errorsDetected = true;
-//      }
-//    };
-//
-//    $scope.resetForm = function () {
-//      $scope.formIsValid = false;
-//      $scope.errorsDetected = false;
-//
-//      console.log('resetForm');
-//    };
+    //   console.log('endtime', $scope.booking.endtime.format('LLL'));
+    // });
 
   }]);
