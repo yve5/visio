@@ -2,46 +2,33 @@
 
 var app = angular.module('app');
 
-app.directive('datepicker', [
-  function () {
-    return {
-      restrict: 'ACE',
-      templateUrl: 'views/datepicker.html',
-      scope: {
-        date: '=date'
-      },
-      link: function ($scope, element, attrs) {
-        var defaultDate = 'moment';
+app.directive('datepicker', ['$timeout', function ($timeout) {
+  return {
+    restrict: 'ACE',
+    require: 'ngModel',
+    templateUrl: 'views/datepicker.html',
+    link: function (scope, elm, attrs, ngModel) {
+      elm.datetimepicker({
+        defaultDate: 'moment',
+        minDate: 'moment',
+        format: 'L',
+        locale: 'fr'
+      });
 
-        if (typeof $scope.date !== 'undefined') {
-          defaultDate = $scope.date;
-        }
+      ngModel.$setViewValue(elm.data('DateTimePicker').date());
 
-        element.datetimepicker({
-          defaultDate: defaultDate,
-          minDate: defaultDate,
-          format: 'L',
-          locale: 'fr'
+      elm.on('dp.change', function (event) {
+        // if(!scope.$$phase) {}
+        $timeout(function() {
+          scope.$apply(function () {
+            ngModel.$setViewValue(event.date);
+          });
         });
+      });
 
-        element.on('dp.change', function (event) {
-          $scope.date = event.date;
-          $scope.$apply();
-        });
+      ngModel.$render = function () {
+        elm.data('DateTimePicker').date(ngModel.$viewValue);
       }
-    };
-  }]);
-
-
-
-//App.directive('directiveName', function () {
-//  return {
-//    restrict: 'A',
-//    link: function (scope, element, attrs) {
-//      $(element).'pluginActivationFunction'(scope.$eval(attrs.directiveName));
-//    }
-//  };
-//});
-
-//<div directiveName ></div>
-//<script type="text/javascript" src="pluginName.js"></script>
+    }
+  };
+}]);

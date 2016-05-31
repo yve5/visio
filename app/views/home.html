@@ -23,27 +23,13 @@
       <form name="form" class="form-horizontal" novalidate>
         <h2>Informations</h2>
 
-<!--        <div class="form-group">
-          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
-          <div class="col-md-9">
-            <datepicker class="input-group date" date="form.date" />
-          </div>
-        </div>-->
-        
         <div class="form-group">
           <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
           <div class="col-md-9">
-            <aze class="input-group date" ng-model="booking.hello" />
+            <datepicker class="input-group date" ng-model="booking.date" />
           </div>
         </div>
         
-        <div class="form-group">
-          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control" ng-model="booking.hello" />
-          </div>
-        </div>
-
         <div class="form-group" ng-class="{ 'has-error' : (form.theme.$invalid && !form.theme.$pristine) || (form.theme.$invalid && form.$submitted) }">
           <label for="theme" class="col-md-3 control-label">Thème de la réunion</label>
           <div class="col-md-9">
@@ -51,6 +37,21 @@
             <p ng-show="(form.theme.$invalid && !form.theme.$pristine) || (form.theme.$invalid && form.$submitted)" class="help-block">
               Le thème doit être renseigné !
             </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
+          <div class="col-md-9">
+            <qsd class="input-group date" ng-model="data.starttime" />
+            <qsd class="input-group date" ng-model="data.starttime" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
+          <div class="col-md-9">
+            <timepicker class="input-group date" time="data.endtime" />
           </div>
         </div>
 
@@ -266,22 +267,6 @@
                       </div>
               
                       
-                      <div class="form-group">
-                        <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
-                        <div class="col-md-9">
-                          <timepicker class="input-group date" time="data.starttime" />
-                        </div>
-                      </div>
-              
-                      <div class="form-group">
-                        <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
-                        <div class="col-md-9">
-                          <timepicker class="input-group date" time="data.endtime" />
-                        </div>
-                      </div>
-              
-              
-              
                       <h2>Autre site de visioconférence</h2>
               
                       <div class="table-responsive">
