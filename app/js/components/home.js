@@ -35,11 +35,11 @@ app.controller('homeController', ['$scope', '$http',
 
     // Salles libres de saisie
     $scope.sample = {name: '', number: '', contact: ''};
-    $scope.booking.freerooms = [];
-    $scope.booking.freerooms.push(angular.copy($scope.sample));
+    $scope.booking.externes = [];
+    $scope.booking.externes.push(angular.copy($scope.sample));
 
-    $scope.addFreeroom = function () {
-      $scope.booking.freerooms.push(angular.copy($scope.sample));
+    $scope.addExterne = function () {
+      $scope.booking.externes.push(angular.copy($scope.sample));
     }
 
     // Salles regulieres

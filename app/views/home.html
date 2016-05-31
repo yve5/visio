@@ -8,10 +8,12 @@
         </div>
         <div class="panel-body">
           Du lundi au vendredi, de 8h30 à 18h30 (CET)
-          <br />
+          <br>
           <span class="red-text">+33 (0)1 70 72 15 49</span>
+          <br>
+          160 &euro; / heure
         </div>
-      </div>
+      </div>  
 
       <h1>Réservation de visioconférence</h1>
 
@@ -236,24 +238,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="freeroom in booking.freerooms">
+              <tr ng-repeat="externe in booking.externes">
                 <td>
-                  <input class="form-control" type="text" ng-model="freeroom.name" name="" placeholder="Nom" required="" />
-                  <p ng-show="true" class="help-block">
-                    Le thème doit être renseigné !
-                  </p>
+                  <input class="form-control" type="text" ng-model="externe.name" name="" placeholder="Nom" required="" />
                 </td>
-                <td><input class="form-control" type="text" ng-model="freeroom.number" placeholder="Numéro" /></td>
-                <td><input class="form-control" type="text" ng-model="freeroom.contact" placeholder="Contact" /></td>
+                <td><input class="form-control" type="text" ng-model="externe.number" placeholder="Numéro" /></td>
+                <td><input class="form-control" type="text" ng-model="externe.contact" placeholder="Contact" /></td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p>
-          <button type="button" class="btn btn-default" ng-click="addFreeroom()">
+          <button type="button" class="btn btn-default" ng-click="addExterne()">
             <span class="glyphicon glyphicon-plus"></span> 
-            Ajouter une salle
+            Ajouter une salle externe
           </button>
         </p>
 
