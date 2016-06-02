@@ -6,10 +6,14 @@ app.controller('homeController', ['$scope', '$http',
   function ($scope, $http) {
     $scope.master = {};
 
-    $scope.update = function (booking) {
-//      console.log('form', $scope.form.theme.$valid);
 
-      $scope.checkRooms();
+    
+
+
+    $scope.update = function (booking) {
+      console.log('form', $scope.form.$valid);
+
+      // $scope.checkRooms();
 
       if ($scope.form.$valid) {
         $scope.master = angular.copy(booking);
@@ -27,6 +31,10 @@ app.controller('homeController', ['$scope', '$http',
 
     $scope.reset();
 
+
+    $scope.booking.theme = 'Hello World';
+    $scope.booking.email = 'yrouille@hachette-livre.fr';
+    $scope.booking.phone = '0123456789';
 
     $scope.booking.starttime = moment().hours('10').minutes('00').seconds('00');
     $scope.booking.endtime = moment().hours('11').minutes('00').seconds('00');

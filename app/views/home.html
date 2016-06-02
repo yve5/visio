@@ -19,7 +19,7 @@
 
       <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
         <span class="glyphicon glyphicon-alert"></span>
-        Veuillez remplir les champs manquants.
+        Merci de compléter le formulaire ci-dessus conformément aux erreurs signalées dans celui-ci.
       </div>
 
       <form name="form" class="form-horizontal" novalidate>
@@ -240,7 +240,7 @@
             <tbody>
               <tr ng-repeat="externe in booking.externes">
                 <td>
-                  <input class="form-control" type="text" ng-model="externe.name" name="" placeholder="Nom" required="" />
+                  <input class="form-control" type="text" ng-model="externe.name" name="" placeholder="Nom" />
                 </td>
                 <td><input class="form-control" type="text" ng-model="externe.number" placeholder="Numéro" /></td>
                 <td><input class="form-control" type="text" ng-model="externe.contact" placeholder="Contact" /></td>
@@ -271,7 +271,7 @@
 
       <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
         <span class="glyphicon glyphicon-alert"></span>
-        Veuillez remplir les champs manquants.
+        Merci de compléter le formulaire ci-dessus conformément aux erreurs signalées dans celui-ci.
       </div>
 
       <!--      <div class="alert alert-success" ng-show="form.$submitted && form.$valid">
