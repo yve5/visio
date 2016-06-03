@@ -17,9 +17,12 @@
 
       <h1>Réservation de visioconférence</h1>
 
-      <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
-        <span class="glyphicon glyphicon-alert"></span>
+      <div class="alert alert-danger" ng-show="fail">
         Merci de compléter le formulaire ci-dessus conformément aux erreurs signalées dans celui-ci.
+      </div>
+
+      <div class="alert alert-success" ng-show="success">
+        Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
       </div>
 
       <form name="form" class="form-horizontal" novalidate>
@@ -75,9 +78,17 @@
             </p>
           </div>
         </div>
-
-
+        
         <h2>Site Hachette Livre</h2>
+
+        <div class="alert alert-danger" ng-show="roomCheck">
+          Possiblités : 
+          <ul>
+            <li>sélection d'une salle interne et saisie d'une salle externe au minimum</li>
+            <li>sélection de 2 salles internes au minimum</li>
+            <li>saisie de 2 salles externes au minimum</li>
+          </ul>
+        </div>
 
         <div class="row">
           <div class="col-md-6">
@@ -228,6 +239,15 @@
 
         <h2>Autre site de visioconférence</h2>
 
+        <div class="alert alert-danger" ng-show="roomCheck">
+          Possiblités : 
+          <ul>
+            <li>sélection d'une salle interne et saisie d'une salle externe au minimum</li>
+            <li>sélection de 2 salles internes au minimum</li>
+            <li>saisie de 2 salles externes au minimum</li>
+          </ul>
+        </div>
+
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -269,20 +289,18 @@
       </form>
 
 
-      <div class="alert alert-danger" ng-show="form.$submitted && form.$invalid">
-        <span class="glyphicon glyphicon-alert"></span>
+      <div class="alert alert-danger" ng-show="fail">
         Merci de compléter le formulaire ci-dessus conformément aux erreurs signalées dans celui-ci.
       </div>
 
-      <!--      <div class="alert alert-success" ng-show="form.$submitted && form.$valid">
-              <span class="glyphicon glyphicon-alert"></span>
-              Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
-            </div>-->
+      <div class="alert alert-success" ng-show="success">
+        Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
+      </div>
 
-
+<!-- 
       <pre>booking = {{booking| json}}</pre>
       <pre>master = {{master| json}}</pre>
-
+ -->
     </div>
   </div>
 </div>

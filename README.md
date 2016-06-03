@@ -1,14 +1,4 @@
-# MF Gulp Boilerplate
-
-
-## What is it?
-
-This is a personal Gulp and AngularJS project.
-
-
-## Todo list
-
-- i18n
+# Room booking form
 
 
 ## Installation

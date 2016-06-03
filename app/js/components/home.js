@@ -6,42 +6,57 @@ app.controller('homeController', ['$scope', '$http',
   function ($scope, $http) {
     $scope.master = {};
 
-
-    
-
-
+    // Form processing
     $scope.update = function (booking) {
-      console.log('form', $scope.form.$valid);
+      // console.log('form', $scope.form.$valid);
 
-      // $scope.checkRooms();
-
-      if ($scope.form.$valid) {
+      if ($scope.form.$valid && $scope.checkRooms()) {
+        $scope.success = true;
+        $scope.fail = false;
         $scope.master = angular.copy(booking);
-        console.log('success', $scope.master);
+
+        // console.log('success', $scope.master);
+        $http.post('/request.php', $scope.master);
+
+      }
+      else {
+        $scope.success = false;
+        $scope.fail = true;
       }
     };
 
+    // Form reset
     $scope.reset = function (form) {
       if (form) {
         form.$setPristine();
         form.$setUntouched();
+
+        $scope.success = false;
+        $scope.fail = false;
+        $scope.roomCheck = false;
       }
       $scope.booking = angular.copy($scope.master);
     };
 
     $scope.reset();
 
+    // Form checks
+    $scope.roomCheck = false;
+    $scope.success = false;
+    $scope.fail = false;
 
-    $scope.booking.theme = 'Hello World';
-    $scope.booking.email = 'yrouille@hachette-livre.fr';
-    $scope.booking.phone = '0123456789';
+    // Default values
+    // $scope.booking.theme = 'Hello World';
+    // $scope.booking.email = 'yrouille@hachette-livre.fr';
+    // $scope.booking.phone = '0123456789';
 
     $scope.booking.starttime = moment().hours('10').minutes('00').seconds('00');
     $scope.booking.endtime = moment().hours('11').minutes('00').seconds('00');
 
 
 
-    // Salles libres de saisie
+
+    // External rooms
     $scope.sample = {name: '', number: '', contact: ''};
     $scope.booking.externes = [];
     $scope.booking.externes.push(angular.copy($scope.sample));
@@ -50,66 +65,95 @@ app.controller('homeController', ['$scope', '$http',
       $scope.booking.externes.push(angular.copy($scope.sample));
     }
 
-    // Salles regulieres
+
+
+    $scope.master = angular.copy($scope.booking);
+
+
+
+    // Internal rooms
 //    $scope.booking.rooms = [
 //      {name:'Hello World', checked: false}
 //    ];
 
 
-    // Controle sur les salles
+    // Room check
     $scope.checkRooms = function () {
       var result = false;
 
-      // au moins 2 salles regulieres
-      var count = 0;
+      // We count the number of checked internal rooms
+      var inCount = 0;
 
       if ($scope.booking.room1 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room2 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room3 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room4 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room5 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room6 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room7 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room8 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room9 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room10 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room11 === true) {
-        count++;
+        inCount++;
       }
       if ($scope.booking.room12 === true) {
-        count++;
+        inCount++;
       }
 
-      if (count > 1) {
+
+      // We count the number of checked external rooms
+      var exCount = 0;
+
+      // $scope.form.$valid = false;
+        // $scope.form.$submitted = false;
+
+      if (inCount > 1) {
+        $scope.roomCheck = false;
+        return true;
+      }
+
+      for (var i = $scope.booking.externes.length - 1; i >= 0; i--) {
+        if ($scope.booking.externes[i].name !== '' && $scope.booking.externes[i].number !== '' && $scope.booking.externes[i].contact !== '') {
+          exCount++;
+        }
+      }
+
+      // une salle reguliere et au moins une salle libre
+      if (inCount === 1 && exCount >= 1) {
+        $scope.roomCheck = false;
+        return true;
+      }
+
+      // au moins deux salles libres
+      if (inCount === 0 && exCount >= 2) {
+        $scope.roomCheck = false;
         return true;
       }
       
-      // une salle reguliere et au moins une salle libre
-      if (count === 1) {
-        console.log('Hello', 'World');
-      }
-      
-      // au moins deux salles libres
+
+      $scope.roomCheck = true;
+      return false;
     }
 
 
@@ -124,5 +168,8 @@ app.controller('homeController', ['$scope', '$http',
 
     //   console.log('endtime', $scope.booking.endtime.format('LLL'));
     // });
+
+
+
 
   }]);
