@@ -15,8 +15,8 @@ app.controller('homeController', ['$scope', '$http',
         $scope.fail = false;
         $scope.master = angular.copy(booking);
 
-        // console.log('success', $scope.master);
-        $http.post('request.php', $scope.master);
+        console.log('success', $scope.master);
+        // $http.post('request.php', $scope.master);
 
       }
       else {
