@@ -2,47 +2,11 @@
 
 var app = angular.module('app');
 
-// app.directive('timepicker', [
-//   function () {
-//     return {
-//       restrict: 'ACE',
-//       templateUrl: 'views/timepicker.html',
-//       scope: {
-//         time: '='
-//       },
-//       link: function ($scope, element, attrs) {
-//         var defaultDate = 'moment';
-
-//         if (typeof $scope.time !== 'undefined') {
-//           defaultDate = $scope.time;
-//         }
-
-//         $scope.$watch($scope.time, function (newVal, oldVal) {
-//           console.log('timepicker');
-//         });
-        
-//         console.log('timepicker', $scope.time.format());
-        
-//         element.datetimepicker({
-//           defaultDate: defaultDate,
-//           format: 'LT',
-//           locale: 'fr'
-//         });
-
-//         element.on('dp.change', function (event) {
-//           $scope.time = event.date;
-//           $scope.$apply();
-//         });
-//       }
-//     };
-//   }]);
-
-
 app.directive('timepicker', ['$timeout', function ($timeout) {
   return {
     restrict: 'ACE',
     require: 'ngModel',
-    templateUrl: 'views/datepicker.html',
+    templateUrl: 'views/timepicker.html',
     link: function (scope, elm, attrs, ngModel) {
 
       if (typeof attrs.hours === 'undefined') {
@@ -55,6 +19,8 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
 
       elm.datetimepicker({
         defaultDate: moment().hours(scope.$eval(attrs.hours)).minutes(scope.$eval(attrs.minutes)),
+        enabledHours: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+        stepping: 15,
         format: 'LT',
         locale: 'fr'
       });
@@ -70,12 +36,10 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
         });
         // }
       });
-
-
+      
       ngModel.$render = function () {
         elm.data('DateTimePicker').date(ngModel.$viewValue);
       }
     }
   };
 }]);
-

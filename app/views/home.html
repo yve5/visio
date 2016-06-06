@@ -7,13 +7,20 @@
           <h3 class="panel-title">Service Client Arkadin : assistance ou urgence</h3>
         </div>
         <div class="panel-body">
-          Du lundi au vendredi, de 8h30 à 18h30 (CET)
-          <br>
-          <span class="red-text">+33 (0)1 70 72 15 49</span>
-          <br>
-          160 &euro; / heure
+          <div class="row">
+            <div class="col-sm-8">Du lundi au vendredi, de 8h30 à 18h30 (CET)</div>
+            <div class="col-sm-4 text-right hidden-xs">160 &euro; / heure</div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 red-text">+33 (0)1 70 72 15 49</div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 visible-xs">160 &euro; / heure</div>
+          </div>
         </div>
-      </div>  
+      </div>
 
       <h1>Réservation de visioconférence</h1>
 
@@ -57,6 +64,10 @@
           <div class="col-md-9">
             <timepicker class="input-group date" ng-model="booking.endtime" hours="11" minutes="00" />
           </div>
+        </div>
+
+        <div class="alert alert-danger buffer-top" ng-hide="hoursCheck">
+          L'horaire de fin doit être supérieur à l'horaire de début.
         </div>
 
         <div class="form-group" ng-class="{ 'has-error' : (form.email.$invalid && !form.email.$pristine) || (form.email.$invalid && form.$submitted) }">
@@ -209,7 +220,6 @@
           </div>
         </div>
 
-
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Options</h3>
@@ -255,22 +265,28 @@
                 <th>Nom du site / salle / pays</th>
                 <th>Num. ISDN / débit  ou adr. IP</th>
                 <th>Contact technique et numéro de téléphone pour les tests</th>
+                <th ng-show="booking.external.length !== 1"></th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="externe in booking.externes">
+              <tr ng-repeat="item in booking.external">
                 <td>
-                  <input class="form-control" type="text" ng-model="externe.name" name="" placeholder="Nom" />
+                  <input class="form-control" type="text" ng-model="item.name" name="" placeholder="Nom" />
                 </td>
-                <td><input class="form-control" type="text" ng-model="externe.number" placeholder="Numéro" /></td>
-                <td><input class="form-control" type="text" ng-model="externe.contact" placeholder="Contact" /></td>
+                <td><input class="form-control" type="text" ng-model="item.number" placeholder="Numéro" /></td>
+                <td><input class="form-control" type="text" ng-model="item.contact" placeholder="Contact" /></td>
+                <td ng-show="booking.external.length !== 1">
+                  <button class="btn btn-default btn-sm" ng-click="removeExternalRoom($index)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p>
-          <button type="button" class="btn btn-default" ng-click="addExterne()">
+          <button type="button" class="btn btn-default" ng-click="addExternalRoom()">
             <span class="glyphicon glyphicon-plus"></span> 
             Ajouter une salle externe
           </button>
@@ -297,10 +313,7 @@
         Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
       </div>
 
-<!-- 
-      <pre>booking = {{booking| json}}</pre>
-      <pre>master = {{master| json}}</pre>
- -->
+      <!-- <pre>send = {{send | json}}</pre> -->
     </div>
   </div>
 </div>
