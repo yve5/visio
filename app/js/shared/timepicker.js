@@ -12,10 +12,16 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
       if (typeof attrs.hours === 'undefined') {
         attrs.hours = '10';
       }
-
+      
       if (typeof attrs.minutes === 'undefined') {
         attrs.minutes = '00';
       }
+
+      if (typeof attrs.idfocus === 'undefined') {
+        scope.idfocus = 'end-time';
+      }
+
+      scope.idfocus = attrs.idfocus;
 
       elm.datetimepicker({
         defaultDate: moment().hours(scope.$eval(attrs.hours)).minutes(scope.$eval(attrs.minutes)),

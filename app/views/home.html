@@ -36,7 +36,7 @@
         <h2>Informations</h2>
 
         <div class="form-group">
-          <label for="form-date-reunion" class="col-md-3 control-label">Date de réunion</label>
+          <label for="meeting-date" class="col-md-3 control-label">Date de réunion</label>
           <div class="col-md-9">
             <datepicker class="input-group date" ng-model="booking.date" />
           </div>
@@ -53,14 +53,14 @@
         </div>
 
         <div class="form-group">
-          <label for="form-date-reunion" class="col-md-3 control-label">Heure de début</label>
+          <label for="start-time" class="col-md-3 control-label">Heure de début</label>
           <div class="col-md-9">
-            <timepicker class="input-group date" ng-model="booking.starttime" />
+            <timepicker class="input-group date" ng-model="booking.starttime" idfocus="start-time" />
           </div>
         </div>
 
         <div class="form-group">
-          <label for="form-heure-debut" class="col-md-3 control-label">Heure de fin</label>
+          <label for="end-time" class="col-md-3 control-label">Heure de fin</label>
           <div class="col-md-9">
             <timepicker class="input-group date" ng-model="booking.endtime" hours="11" minutes="00" />
           </div>
