@@ -5,22 +5,21 @@ var app = angular.module('app');
 app.controller('homeController', ['$scope', '$http',
   function (scope, http) {
     scope.master  = {};
-    scope.send    = {};
+    scope.booking = {};
 
     // form processing
     scope.update = function (booking) {
       if (scope.form.$valid && scope.checkRooms() && scope.hoursCheck) {
         scope.success = true;
         scope.fail    = false;
-        scope.master  = angular.copy(booking);
 
-        scope.send            = angular.copy(scope.master);
-        scope.send.date       = scope.master.date.format('LL');
-        scope.send.starttime  = scope.master.starttime.format('LT');
-        scope.send.endtime    = scope.master.endtime.format('LT');
+        scope.master            = angular.copy(scope.booking);
+        scope.master.date       = scope.booking.date.format('LL');
+        scope.master.starttime  = scope.booking.starttime.format('LT');
+        scope.master.endtime    = scope.booking.endtime.format('LT');
 
-        console.log('success', scope.send);
-        // http.post('request.php', scope.send);
+        // console.log('success', scope.master);
+        http.post('request.php', scope.master);
       }
       else {
         scope.success = false;
@@ -28,31 +27,10 @@ app.controller('homeController', ['$scope', '$http',
       }
     };
 
-    // form reset
-    scope.reset = function (form) {
-      if (form) {
-        form.$setPristine();
-        form.$setUntouched();
-
-        scope.success   = false;
-        scope.fail      = false;
-        scope.roomCheck = false;
-      }
-      scope.booking = angular.copy(scope.master);
-    };
-
-    scope.reset();
-
     // form checks
     scope.roomCheck = false;
     scope.success   = false;
     scope.fail      = false;
-
-    // default values
-    scope.booking.theme     = 'Réunion magique';
-    scope.booking.email     = 'yrouille@hachette-livre.fr';
-    scope.booking.phone     = '0123456789';
-    scope.booking.comments  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.\n\nCras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.';
 
     // external rooms
     scope.sample = {name: '', number: '', contact: ''};
@@ -68,9 +46,6 @@ app.controller('homeController', ['$scope', '$http',
         scope.booking.external.splice(index, 1);
       }
     }
-
-    // master copy
-    scope.master = angular.copy(scope.booking);
 
     // Room check
     scope.checkRooms = function () {

@@ -300,10 +300,6 @@
         </p>
 
         <p>
-          <button type="button" class="btn btn-primary" ng-click="reset(form)">
-            <span class="glyphicon glyphicon-repeat"></span> 
-            Réinitialiser
-          </button>
           <button type="submit" class="btn btn-primary" ng-click="update(booking)">
             <span class="glyphicon glyphicon-send"></span> 
             Soumettre
@@ -315,12 +311,11 @@
       <div class="alert alert-danger" ng-show="fail">
         Merci de compléter le formulaire ci-dessus conformément aux erreurs signalées dans celui-ci.
       </div>
-
+      
       <div class="alert alert-success" ng-show="success">
         Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
       </div>
 
       <!-- <pre>send = {{send | json}}</pre> -->
-    </div>
   </div>
 </div>
