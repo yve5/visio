@@ -1,4 +1,4 @@
-# Room booking form
+# Room Booking Form
 
 
 ## Installation
@@ -52,4 +52,4 @@ Type the command line **gulp** in terminal.
 
 ## License
 
-MF Gulp Boilerplate is released under the [MIT License](http://opensource.org/licenses/MIT).
+Room Booking Form is released under the [MIT License](http://opensource.org/licenses/MIT).

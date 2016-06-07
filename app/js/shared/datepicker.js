@@ -6,7 +6,7 @@ app.directive('datepicker', ['$timeout', function ($timeout) {
   return {
     restrict: 'ACE',
     require: 'ngModel',
-    templateUrl: 'views/datepicker.html',
+    templateUrl: 'html/datepicker.html',
     link: function (scope, elm, attrs, ngModel) {
       elm.datetimepicker({
         defaultDate: 'moment',

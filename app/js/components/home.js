@@ -4,8 +4,8 @@ var app = angular.module('app');
 
 app.controller('homeController', ['$scope', '$http',
   function (scope, http) {
-    scope.master = {};
-    scope.send = {};
+    scope.master  = {};
+    scope.send    = {};
 
     // form processing
     scope.update = function (booking) {
@@ -34,8 +34,8 @@ app.controller('homeController', ['$scope', '$http',
         form.$setPristine();
         form.$setUntouched();
 
-        scope.success = false;
-        scope.fail = false;
+        scope.success   = false;
+        scope.fail      = false;
         scope.roomCheck = false;
       }
       scope.booking = angular.copy(scope.master);
@@ -45,13 +45,14 @@ app.controller('homeController', ['$scope', '$http',
 
     // form checks
     scope.roomCheck = false;
-    scope.success = false;
-    scope.fail = false;
+    scope.success   = false;
+    scope.fail      = false;
 
     // default values
-    scope.booking.theme = 'Réunion magique';
-    scope.booking.email = 'yrouille@hachette-livre.fr';
-    scope.booking.phone = '0123456789';
+    scope.booking.theme     = 'Réunion magique';
+    scope.booking.email     = 'yrouille@hachette-livre.fr';
+    scope.booking.phone     = '0123456789';
+    scope.booking.comments  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.\n\nCras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.';
 
     // external rooms
     scope.sample = {name: '', number: '', contact: ''};
@@ -193,7 +194,6 @@ app.controller('homeController', ['$scope', '$http',
             else {
               scope.hoursCheck = true;
             }
-
           }
           else {
             scope.hoursCheck = true;

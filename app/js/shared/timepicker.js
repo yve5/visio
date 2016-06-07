@@ -6,9 +6,10 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
   return {
     restrict: 'ACE',
     require: 'ngModel',
-    templateUrl: 'views/timepicker.html',
+    templateUrl: 'html/timepicker.html',
     link: function (scope, elm, attrs, ngModel) {
 
+      // default parameters
       if (typeof attrs.hours === 'undefined') {
         attrs.hours = '10';
       }
@@ -17,12 +18,10 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
         attrs.minutes = '00';
       }
 
-      if (typeof attrs.idfocus === 'undefined') {
-        scope.idfocus = 'end-time';
-      }
+      // input id setting for focus effect
+      elm.children('input').attr('id', attrs.idfocus);
 
-      scope.idfocus = attrs.idfocus;
-
+      // jquery plugin call
       elm.datetimepicker({
         defaultDate: moment().hours(scope.$eval(attrs.hours)).minutes(scope.$eval(attrs.minutes)),
         enabledHours: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
@@ -34,13 +33,11 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
       ngModel.$setViewValue(elm.data('DateTimePicker').date());
 
       elm.on('dp.change', function (event) {
-        // if(!scope.$$phase) {
         $timeout(function() {
           scope.$apply(function () {
             ngModel.$setViewValue(event.date);
           });
         });
-        // }
       });
       
       ngModel.$render = function () {

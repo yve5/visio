@@ -10,7 +10,7 @@ app.controller('footerController', ['$scope',
 app.directive('footer', [
   function () {
     return {
-      templateUrl: 'views/footer.html',
+      templateUrl: 'html/footer.html',
       controller: 'footerController',
       restrict: 'ACE'
     };

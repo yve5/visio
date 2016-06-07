@@ -1,17 +1,17 @@
 'use strict';
 
-// Require
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var runs = require('run-sequence');
-var bsync = require('browser-sync');
-var reload = bsync.reload;
+// require
+var gulp    = require('gulp');
+var $       = require('gulp-load-plugins')();
+var runs    = require('run-sequence');
+var bsync   = require('browser-sync');
+var reload  = bsync.reload;
 var stylish = require('jshint-stylish');
-var path = require('path');
-var Karma = require('karma').Server;
+var path    = require('path');
+var karma   = require('karma').Server;
 
 
-// Configurable paths
+// configurable paths
 var appConfig = {
   bower: 'bower_components',
   dist: 'dist',
@@ -19,7 +19,7 @@ var appConfig = {
 };
 
 
-// CSS generation from SCSS
+// css generation from scss
 gulp.task('scss', function () {
   return gulp.src(appConfig.app + '/css/*.scss')
           .pipe($.sass.sync({
@@ -32,7 +32,7 @@ gulp.task('scss', function () {
 });
 
 
-// JS Hints
+// js hints
 var testFiles = ['gulpfile.js', appConfig.app + '/js/**/*.js', 'test/**/*.js'];
 
 gulp.task('jshint', function () {
@@ -52,18 +52,20 @@ gulp.task('hint', ['jshint', 'jscs'], function () {
 });
 
 
-// HTML optimization
+// html optimization
 var htmlEntities = function (input, output) {
   return gulp.src(input)
           .pipe($.useref())
+          .pipe($.if('*.js', $.replace('\'html/', '\'app/html/')))
           .pipe($.if('*.js', $.uglify()))
           .pipe($.if('*.js', $.rev()))
           .pipe($.if('*.css', $.cssmin()))
           .pipe($.if('*.css', $.rev()))
+          .pipe($.if('*.html', $.replace('src="img/', 'src="app/img/')))
           .pipe($.if('*.html', $.htmlmin({
-            removeComments: true,
+            conservativeCollapse: true,
             collapseWhitespace: true,
-            conservativeCollapse: true
+            removeComments: true
           })))
           .pipe($.revReplace())
           .pipe(gulp.dest(output));
@@ -74,11 +76,11 @@ gulp.task('html', ['scss'], function () {
 });
 
 gulp.task('views', ['scss'], function () {
-  return htmlEntities(appConfig.app + '/views/*.html', appConfig.dist + '/views');
+  return htmlEntities(appConfig.app + '/html/*.html', appConfig.dist + '/app/html');
 });
 
 
-// Images
+// images
 gulp.task('favicon', function () {
   return gulp.src([appConfig.app + '/favicon.ico'])
           .pipe($.rev())
@@ -92,46 +94,46 @@ gulp.task('favicon', function () {
 
 gulp.task('images', function () {
   return gulp.src(appConfig.app + '/img/**/*')
-          .pipe(gulp.dest(appConfig.dist + '/img'));
+          .pipe(gulp.dest(appConfig.dist + '/app/img'));
 });
 
 
-// Fonts
+// fonts
 gulp.task('fonts', function () {
-  // Project Fonts
+  // project fonts
   var project = gulp.src(appConfig.app + '/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-          .pipe(gulp.dest(appConfig.dist + '/fonts'));
+          .pipe(gulp.dest(appConfig.dist + '/app/fonts'));
 
-  // Bootstrap Fonts
+  // bootstrap fonts
   var bootstrap = gulp.src(appConfig.bower + '/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}')
-          .pipe(gulp.dest(appConfig.dist + '/fonts'));
+          .pipe(gulp.dest(appConfig.dist + '/app/fonts'));
 
-  // Output
+  // output
   return project && bootstrap;
 });
 
 
-// Delete files and folders
+// delete files and folders
 gulp.task('clean', function () {
   return gulp.src([appConfig.dist]).pipe($.rimraf());
 });
 
 
-// Build the application
+// build app
 gulp.task('build', function () {
   runs('clean', 'html', 'views', 'images', 'favicon', 'fonts', 'dist');
 });
 
 
-// Test
+// test
 gulp.task('test', function (done) {
-  new Karma({
+  new karma({
     configFile: __dirname + '/test/my.conf.js'
   }, done).start();
 });
 
 
-// Start application
+// start app
 gulp.task('serve', ['scss'], function () {
   bsync({
     notify: false,
@@ -146,7 +148,7 @@ gulp.task('serve', ['scss'], function () {
 
   gulp.watch([
     appConfig.app + '/*.html',
-    appConfig.app + '/views/*.html',
+    appConfig.app + '/html/*.html',
     appConfig.app + '/js/**/*.js',
     appConfig.app + '/img/**/*',
     appConfig.app + '/fonts/**/*',
@@ -157,7 +159,7 @@ gulp.task('serve', ['scss'], function () {
 });
 
 
-// Distribution version generation
+// distribution version generation
 gulp.task('dist', function () {
   bsync({
     notify: false,
@@ -169,5 +171,5 @@ gulp.task('dist', function () {
 });
 
 
-// Default task
+// default task
 gulp.task('default', ['serve']);
