@@ -8,7 +8,7 @@ var bsync   = require('browser-sync');
 var reload  = bsync.reload;
 var stylish = require('jshint-stylish');
 var path    = require('path');
-var karma   = require('karma').Server;
+var Karma   = require('karma').Server;
 
 
 // configurable paths
@@ -127,7 +127,7 @@ gulp.task('build', function () {
 
 // test
 gulp.task('test', function (done) {
-  new karma({
+  new Karma({
     configFile: __dirname + '/test/my.conf.js'
   }, done).start();
 });

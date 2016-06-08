@@ -42,7 +42,7 @@ app.directive('timepicker', ['$timeout', function ($timeout) {
       
       ngModel.$render = function () {
         elm.data('DateTimePicker').date(ngModel.$viewValue);
-      }
+      };
     }
   };
 }]);

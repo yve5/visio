@@ -8,7 +8,7 @@ app.controller('homeController', ['$scope', '$http',
     scope.booking = {};
 
     // form processing
-    scope.update = function (booking) {
+    scope.update = function () {
       if (scope.form.$valid && scope.checkRooms() && scope.hoursCheck) {
         scope.success = true;
         scope.fail    = false;
@@ -39,18 +39,16 @@ app.controller('homeController', ['$scope', '$http',
 
     scope.addExternalRoom = function () {
       scope.booking.external.push(angular.copy(scope.sample));
-    }
+    };
 
     scope.removeExternalRoom = function (index) {
       if (index > -1) {
         scope.booking.external.splice(index, 1);
       }
-    }
+    };
 
     // Room check
     scope.checkRooms = function () {
-      var result = false;
-
       // checked internal rooms total
       var inCount = 0;
 
@@ -120,12 +118,12 @@ app.controller('homeController', ['$scope', '$http',
       
       scope.roomCheck = true;
       return false;
-    }
+    };
 
     // starttime & endtime 
     scope.hoursCheck = true;
 
-    scope.$watch('booking.starttime', function (newValue, oldValue) {
+    scope.$watch('booking.starttime', function () {
       if (typeof scope.booking.starttime !== 'undefined') {
         if (scope.booking.starttime === false) {
           scope.booking.starttime = moment().hours('10').minutes('00');
@@ -136,7 +134,7 @@ app.controller('homeController', ['$scope', '$http',
           scope.hoursCheck = false;
         }
         else {
-          if (scope.booking.starttime.hours() == scope.booking.endtime.hours()) {
+          if (scope.booking.starttime.hours() === scope.booking.endtime.hours()) {
             if (scope.booking.starttime.minutes() >= scope.booking.endtime.minutes()) {
               scope.hoursCheck = false;
             }
@@ -151,7 +149,7 @@ app.controller('homeController', ['$scope', '$http',
       }
     });
 
-    scope.$watch('booking.endtime', function (newValue, oldValue) {
+    scope.$watch('booking.endtime', function () {
       if (typeof scope.booking.endtime !== 'undefined') {
         if (scope.booking.endtime === false) {
           scope.booking.starttime = moment().hours('10').minutes('00');
@@ -162,7 +160,7 @@ app.controller('homeController', ['$scope', '$http',
           scope.hoursCheck = false;
         }
         else {
-          if (scope.booking.starttime.hours() == scope.booking.endtime.hours()) {
+          if (scope.booking.starttime.hours() === scope.booking.endtime.hours()) {
             if (scope.booking.starttime.minutes() >= scope.booking.endtime.minutes()) {
               scope.hoursCheck = false;
             }
