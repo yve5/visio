@@ -1,7 +1,7 @@
 {
   "name": "visio",
-  "version": "0.1.0",
-  "description": "Reservation de visioconference",
+  "version": "1.0.1",
+  "description": "reservation de visioconference",
   "private": true,
   "author": "Yve5",
   "license": "MIT",

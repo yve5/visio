@@ -18,8 +18,8 @@ app.controller('homeController', ['$scope', '$http',
         scope.master.starttime  = scope.booking.starttime.format('LT');
         scope.master.endtime    = scope.booking.endtime.format('LT');
 
-        // console.log('success', scope.master);
-        http.post('request.php', scope.master);
+        console.log('success', scope.master);
+        // http.post('request.php', scope.master);
       }
       else {
         scope.success = false;
@@ -99,7 +99,11 @@ app.controller('homeController', ['$scope', '$http',
       }
 
       for (var i = scope.booking.external.length - 1; i >= 0; i--) {
-        if (scope.booking.external[i].name !== '' && scope.booking.external[i].number !== '' && scope.booking.external[i].contact !== '') {
+        var nameTmp     = scope.booking.external[i].name;
+        var numberTmp   = scope.booking.external[i].number;
+        var contactTmp  = scope.booking.external[i].contact;
+
+        if (!_.isEmpty(nameTmp) && !_.isEmpty(numberTmp) && !_.isEmpty(contactTmp)) {
           exCount++;
         }
       }
@@ -120,11 +124,11 @@ app.controller('homeController', ['$scope', '$http',
       return false;
     };
 
-    // starttime & endtime 
+    // starttime & endtime
     scope.hoursCheck = true;
 
     scope.$watch('booking.starttime', function () {
-      if (typeof scope.booking.starttime !== 'undefined') {
+      if (!_.isUndefined(scope.booking.starttime)) {
         if (scope.booking.starttime === false) {
           scope.booking.starttime = moment().hours('10').minutes('00');
           scope.booking.endtime = moment().hours('11').minutes('00');
@@ -150,7 +154,7 @@ app.controller('homeController', ['$scope', '$http',
     });
 
     scope.$watch('booking.endtime', function () {
-      if (typeof scope.booking.endtime !== 'undefined') {
+      if (!_.isUndefined(scope.booking.endtime)) {
         if (scope.booking.endtime === false) {
           scope.booking.starttime = moment().hours('10').minutes('00');
           scope.booking.endtime = moment().hours('11').minutes('00');
