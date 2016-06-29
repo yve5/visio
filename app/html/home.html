@@ -113,63 +113,63 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room1" ng-init="booking.room1 = false">
+                    <input type="checkbox" ng-model="booking.internal[0].isChecked">
                     FR · Vanves · A. Dumas1
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room2" ng-init="booking.room2 = false">
+                    <input type="checkbox" ng-model="booking.internal[1].isChecked">
                     FR · Vanves · A. Joanne
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room3" ng-init="booking.room3 = false">
+                    <input type="checkbox" ng-model="booking.internal[2].isChecked">
                     FR · Vanves · Bredif
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room4" ng-init="booking.room4 = false">
+                    <input type="checkbox" ng-model="booking.internal[3].isChecked">
                     FR · Vanves · C. de Segur
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room5" ng-init="booking.room5 = false">
+                    <input type="checkbox" ng-model="booking.internal[4].isChecked">
                     FR · Vanves · E. Reclus
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room6" ng-init="booking.room6 = false">
+                    <input type="checkbox" ng-model="booking.internal[5].isChecked">
                     FR · Vanves · J.L. Lagardère
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room7" ng-init="booking.room7 = false">
+                    <input type="checkbox" ng-model="booking.internal[6].isChecked">
                     FR · Vanves · J. Michelet
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room8" ng-init="booking.room8 = false">
+                    <input type="checkbox" ng-model="booking.internal[7].isChecked">
                     FR · Vanves · J. Verne
                   </label>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room9" ng-init="booking.room9 = false">
+                    <input type="checkbox" ng-model="booking.internal[8].isChecked">
                     FR · Vanves · V. Hugo
                   </label>
                 </div>
@@ -185,7 +185,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room10" ng-init="booking.room10 = false">
+                    <input type="checkbox" ng-model="booking.internal[9].isChecked">
                     FR · Vélizy · A. Turing
                   </label>
                 </div>
@@ -199,7 +199,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room11" ng-init="booking.room11 = false">
+                    <input type="checkbox" ng-model="booking.internal[10].isChecked">
                     FR · Malakoff · Avenir
                   </label>
                 </div>
@@ -213,7 +213,7 @@
               <div class="panel-body">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.room12" ng-init="booking.room12 = false">
+                    <input type="checkbox" ng-model="booking.internal[11].isChecked">
                     FR · Maurepas · B. Pascal
                   </label>
                 </div>
@@ -231,7 +231,7 @@
               <div class="col-md-6">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.assistance" ng-init="booking.assistance = false">
+                    <input type="checkbox" ng-model="booking.assistance">
                     Service d'assistance (160 &euro;/heure)
                   </label>
                 </div>
@@ -240,7 +240,7 @@
               <div class="col-md-6">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="booking.audio" ng-init="booking.audio = false">
+                    <input type="checkbox" ng-model="booking.audio">
                     Accès audio
                   </label>
                 </div>
@@ -278,28 +278,55 @@
                 <td><input class="form-control" type="text" ng-model="item.number" placeholder="Numéro" /></td>
                 <td><input class="form-control" type="text" ng-model="item.contact" placeholder="Contact" /></td>
                 <td ng-show="booking.external.length !== 1">
-                  <button class="btn btn-default btn-sm" ng-click="removeExternalRoom($index)">
+                  <a class="btn btn-default btn-sm" ng-click="removeExternalRoom($index)">
                     <span class="glyphicon glyphicon-remove"></span>
-                  </button>
+                  </a>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <p>
-          <button type="button" class="btn btn-default" ng-click="addExternalRoom()">
-            <span class="glyphicon glyphicon-plus"></span> 
-            Ajouter une salle externe
-          </button>
-        </p>
 
-        <p>
-          <button type="submit" class="btn btn-primary" ng-click="update()">
-            <span class="glyphicon glyphicon-send"></span> 
-            Soumettre
-          </button>
-        </p>
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <button type="button" class="btn btn-default" ng-click="addExternalRoom()">
+              <span class="glyphicon glyphicon-plus"></span> 
+              Ajouter une salle externe
+            </button>
+          </div>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error' : booking.representError }">
+          <label for="represent" class="col-md-3 control-label">Interlocuteur</label>
+          <div class="col-md-9">
+            <input class="form-control" name="represent" id="represent" type="text" placeholder="Interlocuteur" ng-model="booking.represent" />
+            <p ng-show="booking.representError" class="help-block">
+              L'interlocuteur est incorrect !
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group buffer-bottom" ng-class="{ 'has-error' : booking.addressError }">
+          <label for="address" class="col-md-3 control-label">Adresse</label>
+          <div class="col-md-9">
+            <input class="form-control" name="address" id="address" type="text" placeholder="Adresse" ng-model="booking.address" />
+            <p ng-show="booking.addressError" class="help-block">
+              L'adresse est incorrecte !
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <button type="submit" class="btn btn-primary" ng-click="update()">
+              <span class="glyphicon glyphicon-send"></span> 
+              Soumettre
+            </button>
+          </div>
+        </div>
+
       </form>
 
 
@@ -311,6 +338,6 @@
         Le formulaire a été envoyé avec succès. Vous allez recevoir un courriel de confirmation dans quelques instants.
       </div>
 
-      <!-- <pre>send = {{send | json}}</pre> -->
+      <!-- <pre>send = {{booking | json}}</pre> -->
   </div>
 </div>

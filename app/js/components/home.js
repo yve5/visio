@@ -4,8 +4,35 @@ var app = angular.module('app');
 
 app.controller('homeController', ['$scope', '$http',
   function (scope, http) {
-    scope.master  = {};
-    scope.booking = {};
+
+    scope.init = function () {
+      scope.master  = {};
+      scope.booking = {};
+
+      // form checks
+      scope.roomCheck = false;
+      scope.success   = false;
+      scope.fail      = false;
+
+      // internal rooms
+      scope.booking.internal = [];
+      var iii;
+
+      for (iii = 0; iii < 12; iii++) {
+        scope.booking.internal.push({ 'id' : iii, 'isChecked' : false })
+      }
+
+      // external rooms
+      scope.sample = {name: '', number: '', contact: ''};
+      scope.booking.external = [];
+      scope.booking.external.push(angular.copy(scope.sample));
+
+      scope.booking.assistance  = false;
+      scope.booking.audio       = false;
+
+      // starttime & endtime
+      scope.hoursCheck = true;
+    }
 
     // form processing
     scope.update = function () {
@@ -18,8 +45,8 @@ app.controller('homeController', ['$scope', '$http',
         scope.master.starttime  = scope.booking.starttime.format('LT');
         scope.master.endtime    = scope.booking.endtime.format('LT');
 
-        console.log('success', scope.master);
-        // http.post('request.php', scope.master);
+        // console.log('success', scope.master);
+        http.post('request.php', scope.master);
       }
       else {
         scope.success = false;
@@ -27,15 +54,6 @@ app.controller('homeController', ['$scope', '$http',
       }
     };
 
-    // form checks
-    scope.roomCheck = false;
-    scope.success   = false;
-    scope.fail      = false;
-
-    // external rooms
-    scope.sample = {name: '', number: '', contact: ''};
-    scope.booking.external = [];
-    scope.booking.external.push(angular.copy(scope.sample));
 
     scope.addExternalRoom = function () {
       scope.booking.external.push(angular.copy(scope.sample));
@@ -47,56 +65,29 @@ app.controller('homeController', ['$scope', '$http',
       }
     };
 
-    // Room check
     scope.checkRooms = function () {
+      // error init
+      scope.booking.representError  = false;
+      scope.booking.addressError    = false;
+
       // checked internal rooms total
       var inCount = 0;
 
-      if (scope.booking.room1 === true) {
-        inCount++;
-      }
-      if (scope.booking.room2 === true) {
-        inCount++;
-      }
-      if (scope.booking.room3 === true) {
-        inCount++;
-      }
-      if (scope.booking.room4 === true) {
-        inCount++;
-      }
-      if (scope.booking.room5 === true) {
-        inCount++;
-      }
-      if (scope.booking.room6 === true) {
-        inCount++;
-      }
-      if (scope.booking.room7 === true) {
-        inCount++;
-      }
-      if (scope.booking.room8 === true) {
-        inCount++;
-      }
-      if (scope.booking.room9 === true) {
-        inCount++;
-      }
-      if (scope.booking.room10 === true) {
-        inCount++;
-      }
-      if (scope.booking.room11 === true) {
-        inCount++;
-      }
-      if (scope.booking.room12 === true) {
-        inCount++;
-      }
-
-
-      // checked external rooms total
-      var exCount = 0;
+      _.forEach(scope.booking.internal, function (item) {
+        if (item.isChecked === true) {
+          inCount++;
+        }
+      });
 
       if (inCount > 1) {
         scope.roomCheck = false;
         return true;
       }
+
+
+      // external rooms IF NEED
+      // checked external rooms total
+      var exCount = 0;
 
       for (var i = scope.booking.external.length - 1; i >= 0; i--) {
         var nameTmp     = scope.booking.external[i].name;
@@ -108,14 +99,23 @@ app.controller('homeController', ['$scope', '$http',
         }
       }
 
-      // one internal room and one external room at least
-      if (inCount === 1 && exCount >= 1) {
-        scope.roomCheck = false;
-        return true;
-      }
 
-      // two external rooms at least
-      if (inCount === 0 && exCount >= 2) {
+      // one internal room and one external room at least
+      // Or two external rooms at least
+      if ((inCount === 1 && exCount >= 1) || (inCount === 0 && exCount >= 2)) {
+        // 'representative' and 'address' fields are compulsory
+        if (_.isUndefined(scope.booking.represent) || _.isEmpty(scope.booking.represent) ) {
+          scope.booking.representError = true;
+          scope.roomCheck = true;
+          return false;
+        }
+
+        if (_.isUndefined(scope.booking.address) || _.isEmpty(scope.booking.address) ) {
+          scope.booking.addressError = true;
+          scope.roomCheck = true;
+          return false;
+        }
+
         scope.roomCheck = false;
         return true;
       }
@@ -123,9 +123,6 @@ app.controller('homeController', ['$scope', '$http',
       scope.roomCheck = true;
       return false;
     };
-
-    // starttime & endtime
-    scope.hoursCheck = true;
 
     scope.$watch('booking.starttime', function () {
       if (!_.isUndefined(scope.booking.starttime)) {
@@ -178,5 +175,7 @@ app.controller('homeController', ['$scope', '$http',
         }
       }
     });
+
+    scope.init();
 
   }]);
