@@ -45,8 +45,7 @@ app.controller('homeController', ['$scope', '$http',
         scope.master.starttime  = scope.booking.starttime.format('LT');
         scope.master.endtime    = scope.booking.endtime.format('LT');
 
-        // console.log('success', scope.master);
-        http.post('request.php', scope.master);
+        console.log('success', scope.master);
       }
       else {
         scope.success = false;
