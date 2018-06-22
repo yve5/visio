@@ -1,8 +1,0 @@
-/node_modules
-/dist
-/.tmp
-/.sass-cache
-/bower_components
-/dependencies
-/nbproject
-/package-lock.json
